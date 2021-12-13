@@ -1,0 +1,99 @@
+{% extends "header.html" %}
+{% block content %}
+</style>
+<h2>Landlord Reviews For {{landlord_name}}</h2>
+<hr>
+{%for review in reviews%}
+<div class="media">
+  <div class="media-body">
+    <div id = "container">
+      <div id = "landlord">
+        <h3>{{review.landlord_name}}</h3>
+        <p>Location: {{review.location}} <br> Rating: {{review.rating}}/5 <br> Posted By: {{review.author}}</p>
+      </div>
+      <div id ="review">
+        <p> <i>{{review.review_content}}</i>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<hr>
+<br>
+{%endfor%}
+{% if current_user.is_authenticated %}
+<h3>Leave Your Review for {{landlord_name}}!</h3>
+<form action="" method="POST">
+  {{form.csrf_token }}
+  <div class="form-group">
+    {{ form.name.label(class="form-control-label") }}
+    {{ form.name(class="form-control form-control-md") }}
+
+    {% if form.name.errors %}
+    <div class="alert alert-warning" role="alert">
+      {% for error in form.password.errors %}
+      <span>{{ error }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="form-group">
+    {{ form.address.label(class="form-control-label green-text") }}
+    {{ form.address(class="form-control form-control-md") }}
+
+    {% if form.address.errors %}
+    <div class="alert alert-warning" role="alert">
+      {% for error in form.address.errors %}
+      <span>{{ error }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="form-group">
+    {{ form.landlordReview.label(class="form-control-label green-text") }}
+    {{ form.landlordReview(class="form-control form-control-md") }}
+
+    {% if form.landlordReview.errors %}
+    <div class="alert alert-warning" role="alert">
+      {% for error in form.landlordReview.errors %}
+      <span>{{ error }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ form.rating.label(class="form-control-label green-text") }}
+    {{ form.rating(class="form-control form-control-md") }}
+
+    {% if form.rating.errors %}
+    <div class="alert alert-warning" role="alert">
+      {% for error in form.rating.errors %}
+      <span>{{ error }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+
+
+  {% if errors|length > 0 %}
+  <div class="alert alert-warning" role="alert">
+    {{ errors }}
+  </div>
+  {% endif %}
+  <div class="form-group">
+    {{ form.submit(class="form-control form-control-lg") }}
+  </div>
+  <!-- <button type="submit" class="btn btn-primary">Register Now</button> -->
+</form>
+</section>
+
+{%else%}
+<p style="font-size:18px;">Want to leave your review for {{landlord_name}}? Log in below to get started! </p>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('users.login') }}" role="button">Log In</a>
+      <hr>
+      <p style="font-size:18px;">Don't have an account yet? Just register below!</p>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Register</a>
+{%endif%}
+{% endblock content %}
