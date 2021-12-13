@@ -1,0 +1,185 @@
+{% extends "header.html" %}
+{% block content %}
+
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Rate My UMD Landlord! </h1>
+    <p class="lead">This is a simple website that allows students to rate and review landlords from College Park, Maryland. This web application
+      was created by Surmud Jamil, Aashray Raparla, and Eric Qian, as a final project for CMSC388J at the University of Maryland. This project
+      was made using the Flask framework in Python. To learn more about us, see our About page.
+    </p>
+    <hr class="my-4">
+    {% if not current_user.is_authenticated %}
+    <p style="font-size:18px;">To leave a review, go ahead and register with us.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('users.register') }}" role="button">Register</a>
+      <p style="font-size:18px;">Already have an account? Log in below to get started! </p>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('users.login') }}" role="button">Log In</a>
+    </p>
+    
+   
+    {%else %}
+    <p>Welcome back, you are logged in! Go ahead and leave a review below.</p>
+    {%endif%}
+  </div>
+
+
+
+
+<section>
+  <style>
+    hr {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border: 0;
+      border-top: 7px solid rgba(7, 0, 0, 0.1);
+      padding-top: 0%;
+      padding-bottom: 0%;
+    }
+  
+  #container { 
+      display: flex;
+      background-color:
+      I#f9f9f969;
+      border-radius: 0px;
+      width: 100%;
+      height: 120px;
+      flex-direction: row;
+      align-content: center;
+  }
+  #landlord {
+      font-family: Arial, Helvetica, sans-serif;
+      padding-left: 0%;
+      padding-top: 0%;
+      align-items: center;
+      flex-direction: column;
+      width: 220px;
+      height: 100px;
+  }
+  #review {
+      font-family: Arial, Helvetica, sans-serif;
+      padding-top: 0%;
+      padding-right: 10%;
+      padding-left : 10%;
+      padding-bottom: 10%;
+      display: flex;
+      align-items: left;
+      justify-content: left;
+      width: 700px;
+      height: 100px;
+  
+  }
+  
+
+  
+  </style>
+  
+  <h2> Recent Landlord Reviews</h2>
+  <hr>
+  {%for review in reviews%}
+  <div class="media">
+    <div class="media-body">
+      <div id = "container">
+        <div id = "landlord">
+          
+          <a href="{{ url_for('landlords.landlord', landlord_id = review.landlord_id) }}" ><h3>{{review.landlord_name}}</h3></a>
+          
+          <p>Location: {{review.location}} <br> Rating: {{review.rating}}/5 <br> Posted By: {{review.author}}</p>
+        </div>
+        <div id ="review">
+          <p> {{review.review_content}}
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <hr>
+  <br>
+  {%endfor%}
+  
+  {% if current_user.is_authenticated %}
+  <h3>Leave Your Review</h3>
+  <form action="" method="POST">
+    {{ form.csrf_token }}
+    <div class="form-group">
+      {{ form.landlordName.label(class="form-control-label green-text") }}
+      {{ form.landlordName(class="form-control form-control-md") }}
+  
+      {% if form.landlordName.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.landlordName.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.name.label(class="form-control-label green-text") }}
+      {{ form.name(class="form-control form-control-md") }}
+  
+      {% if form.name.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.password.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.address.label(class="form-control-label green-text") }}
+      {{ form.address(class="form-control form-control-md") }}
+  
+      {% if form.address.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.address.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.landlordReview.label(class="form-control-label green-text") }}
+      {{ form.landlordReview(class="form-control form-control-md") }}
+  
+      {% if form.landlordReview.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.landlordReview.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  
+    <div class="form-group">
+      {{ form.rating.label(class="form-control-label green-text") }}
+      {{ form.rating(class="form-control form-control-md") }}
+  
+      {% if form.rating.errors %}
+      <div class="alert alert-warning" role="alert">
+        {% for error in form.rating.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  
+  
+  
+    {% if errors|length > 0 %}
+    <div class="alert alert-warning" role="alert">
+      {{ errors }}
+    </div>
+    {% endif %}
+    <div class="form-group">
+      {{ form.submit(class="form-control form-control-lg") }}
+    </div>
+    <!-- <button type="submit" class="btn btn-primary">Register Now</button> -->
+  </form>
+  
+</section>
+
+
+{%else%}
+<ps style="font-size: 20px"><img class = "propic" src="../static/testudo_copy.png" alt="pic2"> Want to leave your own review? Go ahead and create an account with us!</ps>
+{%endif%}
+{% endblock %}
