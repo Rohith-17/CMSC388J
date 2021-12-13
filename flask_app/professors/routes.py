@@ -18,15 +18,15 @@ def index():
             course = form.course.data,
             rating = form.rating.data,
             review_content = form.professorReview.data,
-            landlord_id = form.professorName.data.replace(" ", ""))
+            professor_id = form.professorName.data.replace(" ", ""))
 
         review.save()
         return redirect(request.path)
   
     return render_template("index.html", form = form, current_user = current_user, reviews = reviews)
 
-@landlords.route('/landlords/<landlord_id>', methods = ["GET", "POST"])
-def landlord(landlord_id):
+@professors.route('/professors/<professor_id>', methods = ["GET", "POST"])
+def professor(professor_id):
 
     form = CurrentProfessorReviewForm()
     #if landlord_name not in database, display a message
@@ -51,8 +51,8 @@ def landlord(landlord_id):
     return render_template("professor.html", reviews=reviews, landlord_name = landlord_name, form = form, current_user = current_user)
 
 #display a list of all of the landlords in the database
-@landlords.route('/landlords', methods = ["GET", "POST"])
-def landlords_index():
+@professors.route('/professors', methods = ["GET", "POST"])
+def professors_index():
 
     reviews = ProfessorReview.objects()
     professor_ids = []
