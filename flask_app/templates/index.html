@@ -46,7 +46,7 @@
       flex-direction: row;
       align-content: center;
   }
-  #landlord {
+  #professor {
       font-family: Arial, Helvetica, sans-serif;
       padding-left: 0%;
       padding-top: 0%;
@@ -73,7 +73,7 @@
   
   </style>
   
-  <h2> Recent Landlord Reviews</h2>
+  <h2> Recent Professor Reviews</h2>
   <hr>
   {%for review in reviews%}
   <div class="media">
@@ -81,7 +81,7 @@
       <div id = "container">
         <div id = "landlord">
           
-          <a href="{{ url_for('landlords.landlord', landlord_id = review.landlord_id) }}" ><h3>{{review.landlord_name}}</h3></a>
+          <a href="{{ url_for('professors.professor', professor_id = review.professor_id) }}" ><h3>{{review.professor_name}}</h3></a>
           
           <p>Location: {{review.location}} <br> Rating: {{review.rating}}/5 <br> Posted By: {{review.author}}</p>
         </div>
@@ -101,12 +101,12 @@
   <form action="" method="POST">
     {{ form.csrf_token }}
     <div class="form-group">
-      {{ form.landlordName.label(class="form-control-label green-text") }}
-      {{ form.landlordName(class="form-control form-control-md") }}
+      {{ form.professorName.label(class="form-control-label green-text") }}
+      {{ form.professorName(class="form-control form-control-md") }}
   
-      {% if form.landlordName.errors %}
+      {% if form.professorName.errors %}
       <div class="alert alert-warning" role="alert">
-        {% for error in form.landlordName.errors %}
+        {% for error in form.professorName.errors %}
         <span>{{ error }}</span>
         {% endfor %}
       </div>
@@ -137,12 +137,12 @@
       {% endif %}
     </div>
     <div class="form-group">
-      {{ form.landlordReview.label(class="form-control-label green-text") }}
-      {{ form.landlordReview(class="form-control form-control-md") }}
+      {{ form.professorReview.label(class="form-control-label green-text") }}
+      {{ form.professorReview(class="form-control form-control-md") }}
   
-      {% if form.landlordReview.errors %}
+      {% if form.professorReview.errors %}
       <div class="alert alert-warning" role="alert">
-        {% for error in form.landlordReview.errors %}
+        {% for error in form.professorReview.errors %}
         <span>{{ error }}</span>
         {% endfor %}
       </div>
