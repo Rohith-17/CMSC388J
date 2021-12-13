@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template, redirect, request
 from ..forms import ProfessorReviewForm, CurrentProfessorReviewForm
-from ..models import LandlordReview
+from ..models import ProfessorReview
 from flask_login import current_user
 import numpy as np #use np to find unique values of list
 
-landlords = Blueprint("landlords", __name__)
+professors = Blueprint("professors", __name__)
 
-@landlords.route("/", methods=["GET", "POST"])
+@professors.route("/", methods=["GET", "POST"])
 def index():
     form = ProfessorReviewForm()
     reviews = ProfessorReview.objects()
@@ -29,15 +29,15 @@ def index():
 def professor(professor_id):
 
     form = CurrentProfessorReviewForm()
-    #if landlord_name not in database, display a message
-    if not ProfessorReview.objects(landlord_id = landlord_id):
+    #if professor_name not in database, display a message
+    if not ProfessorReview.objects(professor_id = professor_id):
         return render_template("index.html")
     
-    reviews = ProfessorReview.objects(landlord_id=landlord_id)
+    reviews = ProfessorReview.objects(professor_id=professor_id)
     review = reviews.first()
-    professor_name = review.landlord_name
+    professor_name = review.professor_name
     if form.validate_on_submit():
-        review = LandlordReview(
+        review = ProfessorReview(
             author = form.name.data,
             professor_name = professor_name,
             course = form.course.data,
@@ -48,9 +48,9 @@ def professor(professor_id):
         review.save()
         return redirect(request.path)
 
-    return render_template("professor.html", reviews=reviews, landlord_name = landlord_name, form = form, current_user = current_user)
+    return render_template("professor.html", reviews=reviews, professor_name = professor_name, form = form, current_user = current_user)
 
-#display a list of all of the landlords in the database
+#display a list of all of the professors in the database
 @professors.route('/professors', methods = ["GET", "POST"])
 def professors_index():
 
@@ -62,8 +62,8 @@ def professors_index():
         professor_ids.append(review.professor_id)
         professor_names.append(review.professor_name)
 
-    professor_ids = list(np.unique(landlord_ids))
-    professor_names = list(np.unique(landlord_names))
+    professor_ids = list(np.unique(professor_ids))
+    professor_names = list(np.unique(professor_names))
 
     professors = []
     for i in range(len(professor_ids)):
@@ -74,7 +74,7 @@ def professors_index():
 
     return render_template("professors_index.html", professors=professor,  current_user = current_user)
 
-@landlords.route('/about', methods = ["GET", "POST"])
+@professors.route('/about', methods = ["GET", "POST"])
 def about():
     form = ProfessorReviewForm()
  
