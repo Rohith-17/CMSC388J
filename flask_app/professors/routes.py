@@ -14,11 +14,11 @@ def index():
     if form.validate_on_submit():
         review = ProfessorReview(
             author = form.name.data,
-            professor_name = form.landlordName.data,
-            location = form.address.data,
+            professor_name = form.professorName.data,
+            course = form.course.data,
             rating = form.rating.data,
-            review_content = form.landlordReview.data,
-            landlord_id = form.landlordName.data.replace(" ", ""))
+            review_content = form.professorReview.data,
+            landlord_id = form.professorName.data.replace(" ", ""))
 
         review.save()
         return redirect(request.path)
@@ -39,40 +39,40 @@ def landlord(landlord_id):
     if form.validate_on_submit():
         review = LandlordReview(
             author = form.name.data,
-            landlord_name = landlord_name,
-            location = form.address.data,
+            professor_name = professor_name,
+            course = form.course.data,
             rating = form.rating.data,
-            review_content = form.landlordReview.data,
-            landlord_id = form.landlordName.data.replace(" ", ""))
+            review_content = form.professorReview.data,
+            professor_id = form.professorName.data.replace(" ", ""))
 
         review.save()
         return redirect(request.path)
 
-    return render_template("landlord.html", reviews=reviews, landlord_name = landlord_name, form = form, current_user = current_user)
+    return render_template("professor.html", reviews=reviews, landlord_name = landlord_name, form = form, current_user = current_user)
 
 #display a list of all of the landlords in the database
 @landlords.route('/landlords', methods = ["GET", "POST"])
 def landlords_index():
 
     reviews = ProfessorReview.objects()
-    landlord_ids = []
-    landlord_names = []
+    professor_ids = []
+    professor_names = []
     
     for review in reviews:
-        landlord_ids.append(review.landlord_id)
-        landlord_names.append(review.landlord_name)
+        professor_ids.append(review.professor_id)
+        professor_names.append(review.professor_name)
 
-    landlord_ids = list(np.unique(landlord_ids))
-    landlord_names = list(np.unique(landlord_names))
+    professor_ids = list(np.unique(landlord_ids))
+    professor_names = list(np.unique(landlord_names))
 
-    landlords = []
-    for i in range(len(landlord_ids)):
-        landlords.append((landlord_names[i], landlord_ids[i]))
+    professors = []
+    for i in range(len(professor_ids)):
+        professors.append((professor_names[i], professor_ids[i]))
 
 
     #for each id, get all the review ratings for that id
 
-    return render_template("professors_index.html", landlords=landlords,  current_user = current_user)
+    return render_template("professors_index.html", professors=professor,  current_user = current_user)
 
 @landlords.route('/about', methods = ["GET", "POST"])
 def about():
