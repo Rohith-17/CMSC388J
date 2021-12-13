@@ -15,10 +15,10 @@ class User(db.Document, UserMixin):
     def get_id(self):
         return self.username
 
-class LandlordReview(db.Document, UserMixin):
+class ProfessorReview(db.Document, UserMixin):
     author = db.StringField(required=True)
-    landlord_name = db.StringField(required=True)
-    location = db.StringField(required=True)
+    professor_name = db.StringField(required=True)
+    course = db.StringField(required=True)
     rating = db.IntField(required=True)
     review_content = db.StringField(required=True)
     landlord_id = db.StringField(required=True)
