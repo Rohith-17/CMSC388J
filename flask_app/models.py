@@ -21,4 +21,4 @@ class ProfessorReview(db.Document, UserMixin):
     course = db.StringField(required=True)
     rating = db.IntField(required=True)
     review_content = db.StringField(required=True)
-    landlord_id = db.StringField(required=True)
+    professor_id = db.StringField(required=True)
