@@ -14,7 +14,7 @@ def index():
     if form.validate_on_submit():
         review = ProfessorReview(
             author = form.name.data,
-            landlord_name = form.landlordName.data,
+            professor_name = form.landlordName.data,
             location = form.address.data,
             rating = form.rating.data,
             review_content = form.landlordReview.data,
