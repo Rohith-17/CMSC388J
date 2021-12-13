@@ -17,7 +17,7 @@ bcrypt = Bcrypt()
 
 
 from .users.routes import users
-from .landlords.routes import landlords
+from .professors.routes import professors
 
 def page_not_found(e):
     return render_template("404.html"), 404
@@ -41,7 +41,7 @@ def create_app():
 
     
     app.register_blueprint(users)
-    app.register_blueprint(landlords)
+    app.register_blueprint(professors)
 
 
     login_manager.login_view = "users.login"
