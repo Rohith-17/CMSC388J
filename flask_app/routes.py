@@ -15,7 +15,7 @@ def index():
         review = ProfessorReview(
             author = form.name.data,
             landlord_name = form.landlordName.data,
-            location = form.address.data,
+            course = form.course.data,
             rating = form.rating.data,
             review_content = form.landlordReview.data,
             landlord_id = form.landlordName.data.replace(" ", ""))
@@ -40,7 +40,7 @@ def landlord(landlord_id):
         review = LandlordReview(
             author = form.name.data,
             landlord_name = landlord_name,
-            location = form.address.data,
+            course = form.course.data,
             rating = form.rating.data,
             review_content = form.landlordReview.data,
             landlord_id = form.landlordName.data.replace(" ", ""))
