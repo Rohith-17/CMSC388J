@@ -35,7 +35,7 @@ def account(username):
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('landlords.index'))
+        return redirect(url_for('professors.index'))
     
     form = LoginForm()
     errors = ""
@@ -73,4 +73,4 @@ def register():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('landlords.index'))
+    return redirect(url_for('professors.index'))
