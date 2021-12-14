@@ -7,7 +7,7 @@
 <div class="media">
   <div class="media-body">
     <div id = "container">
-      <div id = "landlord">
+      <div id = "professor">
         <h3>{{review.professor_name}}</h3>
         <p>Location: {{review.location}} <br> Rating: {{review.rating}}/5 <br> Posted By: {{review.author}}</p>
       </div>
@@ -38,12 +38,12 @@
     {% endif %}
   </div>
   <div class="form-group">
-    {{ form.address.label(class="form-control-label green-text") }}
-    {{ form.address(class="form-control form-control-md") }}
+    {{ form.course.label(class="form-control-label green-text") }}
+    {{ form.course(class="form-control form-control-md") }}
 
-    {% if form.address.errors %}
+    {% if form.course.errors %}
     <div class="alert alert-warning" role="alert">
-      {% for error in form.address.errors %}
+      {% for error in form.course.errors %}
       <span>{{ error }}</span>
       {% endfor %}
     </div>
