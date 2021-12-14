@@ -1,2 +1,2 @@
-SECRET_KEY = 1WzV73lfSfisdhPVxd0cO2lqe4ONkt8wBNFMuQNPmX7PAxpC1PcZg21hw9dpadC6
+SECRET_KEY = b'\x020;yr\x91\x11\xbe"\x9d\xc1\x14\x91\xadf\xec'
 MONGODB_HOST = "mongodb://localhost:27017/CMSC388J-Final"
