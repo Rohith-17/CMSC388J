@@ -1,2 +1,2 @@
-SECRET_KEY = b'\x020;yr\x91\x11\xbe"\x9d\xc1\x14\x91\xadf\xec'
-MONGODB_HOST = "mongodb+srv://rchandu:<Rohith17!>@cmsc388j-final.c8x5o.mongodb.net/CMSC388J-Final?retryWrites=true&w=majority"
+SECRET_KEY = 1WzV73lfSfisdhPVxd0cO2lqe4ONkt8wBNFMuQNPmX7PAxpC1PcZg21hw9dpadC6
+MONGODB_HOST = "https://data.mongodb-api.com/app/data-gtcma/endpoint/data/beta"
