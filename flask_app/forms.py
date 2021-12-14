@@ -10,11 +10,11 @@ class SearchForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
-#This form lets the user review a landlord from the homepage
+#This form lets the user review a professor from the homepage
 class ProfessorReviewForm(FlaskForm):
     try:
         name = StringField("Enter Your Name, or type \"Anonymous\": ", validators=[InputRequired(), Length(min=1, max = 50)])
-        professorName = StringField("Enter Your Landlord's Name:", validators=[InputRequired(), Length(min=1, max = 50)])
+        professorName = StringField("Enter Your Professor's Name:", validators=[InputRequired(), Length(min=1, max = 50)])
         course = StringField("Enter The Class You Took:", validators=[InputRequired(), Length(min=1, max = 100)])
         professorReview = TextAreaField("How Was Your Professor? Write a detailed review below", validators=[InputRequired(), Length(min=1, max = 500)])
         rating = IntegerField("Give Them A Rating (1-5)", validators = [NumberRange(min=1, max=5)])
@@ -23,12 +23,12 @@ class ProfessorReviewForm(FlaskForm):
         err_msg = str(err)
         print(err_msg)
 
-#This form lets the user rate a landlord from the landlord-specific-page
+#This form lets the user rate a professor from the professor-specific-page
 class CurrentProfessorReviewForm(FlaskForm):
     try:
         name = StringField("Enter Your Name:", validators=[InputRequired(), Length(min=1, max = 50)])
         course = StringField("Enter The Class You Took:", validators=[InputRequired(), Length(min=1, max = 100)])
-        professorReview = TextAreaField("How Was Your Landlord?", validators=[InputRequired(), Length(min=1, max = 500)])
+        professorReview = TextAreaField("How Was Your Professor?", validators=[InputRequired(), Length(min=1, max = 500)])
         rating = IntegerField("Give Them A Rating (1-5)", validators = [NumberRange(min=1, max=5)])
         submit = SubmitField("Submit")
     except ValidationError as err:
